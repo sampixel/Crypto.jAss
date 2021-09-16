@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto.jAss</title>
+    <style>
+        :root {
+            --font-large: 22pt;
+            --font-small: 15pt;
+            --grey: #dfdfdf;
+        }
+        body {
+            margin: 0 20%;
+            padding: 0;
+            box-sizing: border-box;
+            border-left: 1px solid var(--grey);
+            border-right: 1px solid var(--grey);
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #000;
+        }
+        div.encrypt,
+        div.decrypt {
+            text-align: center;
+            display: block;
+        }
+        div.encrypt > h3 {
+            font-size: var(--font-large);
+            font-weight: bold;
+        }
+        div.encrypt > code {
+            font-size: var(--font-small);
+        }
+        div.decrypt > h3 {
+            font-size: var(--font-large);
+            font-weight: bold;
+        }
+        div.decrypt > code {
+            font-size: var(--font-small);
+        }
+    </style>
+</head>
+<body>
+    <h1>Crypto.jAss</h1>
+    <div class="encrypt">
+        <h3>Encrypt</h3>
+    </div>
+    <div class="decrypt">
+        <h3>Decrypt</h3>
+    </div>
+    <script type="module">
+        import {Encrypt, Decrypt} from "./Crypto.jAss.min.js";
+
+        var toEncrypt = '{"Contenuti > Pagine statiche":[4,"/extrapages/staticpages"],"Catalogo > Prodotti > Elenco Correlati":[3,"/catalog/accessories/related"],"Catalogo > Domande e risposte prodotti > Elenco":[1,"/products/questions"],"Assistenze > Centri assistenza > Classi di riparazione":[1,"/assistance/repairclasses"],"Strumenti > Visualizzazione Dump":[2,"/dumper"],"Ricambi > Ordini > Ordini al fornitore":[1,"/warehouse/toorder"]}';
+        var Encrypted = Encrypt(toEncrypt);
+        var Decrypted = Decrypt(Encrypted);
+
+        var codeEncrypted = document.createElement("code");
+            codeEncrypted.innerHTML = Encrypted;
+        var codeDecrypted = document.createElement("code")
+            codeDecrypted.innerHTML = Decrypted;
+
+        document.body.querySelector("div.encrypt").appendChild(codeEncrypted);
+        document.body.querySelector("div.decrypt").appendChild(codeDecrypted);
+
+        console.log(`toEncrypt: ${toEncrypt}`);
+        console.log(`Encrypted: ${Encrypted}`);
+        console.log(`Decrypted: ${Decrypted}`);
+    </script>
+</body>
+</html>
